@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hexagonal Grids</title>
+    <meta name="viewport" content="width=640">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7COpen+Sans'%20rel='stylesheet">
+    <link href="//disqus.com/embed/comments/" rel="preconnect">
+    <link href="//a.disquscdn.com/" rel="preconnect">
+    <meta name="robots" content="noodp">
+    <!-- D3 -->
+    <script src="/js/d3.v3.min.js"></script>
+    <script>
+      <!--
+      (function() {
+        var link = document.createElement('link');
+        link.href = 'http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400italic,700italic,700';
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        if (document.location.hostname != 'localhost')
+          document.getElementsByTagName('html')[0].appendChild(link);
+        }
+      )();
+
+      //-->
+    </script>
+    <style>
+      body {
+        background-color: #fff;
+        color: #333;
+      }
+
+      .diagram {
+        width: 600px;
+        text-align: center;
+      }
+
+      svg {
+        pointer-events: visiblePainted;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      svg > * {
+        pointer-events: none;
+      }
+
+      text {
+        font-size: 14px;
+        text-anchor: middle;
+      }
+
+      .tile polygon {
+        pointer-events: visiblePainted;
+        fill: hsl(60, 10%, 95%);
+        stroke: hsl(0, 0%, 70%);
+        stroke-width: 0.5;
+      }
+
+      .tile.q-axis-same polygon {
+        fill: hsl( 90, 20%, 87%);
+      }
+      .tile.r-axis-same polygon {
+        fill: hsl(200, 15%, 90%);
+      }
+      .tile.s-axis-same polygon {
+        fill: hsl(300, 10%, 90%);
+      }
+      .tile.q-axis-same.r-axis-same polygon {
+        fill: hsl(160, 20%, 80%);
+      }
+      .tile.q-axis-same tspan.q {
+        fill: hsl( 90, 100%, 35%);
+        font-weight: bold;
+      }
+      .tile.r-axis-same tspan.r {
+        fill: hsl(200, 100%, 45%);
+        font-weight: bold;
+      }
+      .tile.s-axis-same tspan.s {
+        fill: hsl(300, 80%, 50%);
+        font-weight: bold;
+      }
+
+
+    </style>
+  </head>
+
+  <body class="gameprog width600">
+
+        <div class="float-container">
+          <div>
+            <div style="width:280px;display:inline-block;margin:5px">
+              <svg id="grid-offset-odd-r" width="800" height="400"></svg><br>
+              &#8220;odd-r&#8221; horizontal layout</div>
+            </div>
+        </div>
+
+        <script src="js/hexlib.js"></script>
+        <script src="js/hexlib_ui.js"></script>
+
+  </body>
+</html>

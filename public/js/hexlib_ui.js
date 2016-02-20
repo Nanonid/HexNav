@@ -399,6 +399,11 @@ function makeGridDiagram(svg, cubes) {
 var grid_cube = makeGridDiagram(d3.select("#grid-cube"), Grid.hexagonalShape(3))
     .addCubeCoordinates(true);
 
+var grid_odd_r =  makeGridDiagram(d3.select('#grid-offset-odd-r'),
+                    Grid.trapezoidalShape(0, 15, 0, 7, Grid.oddRToCube))
+                      .addHexCoordinates(Grid.cubeToOddR, true)
+                      .update(40, true);
+
 function orient(orientation) {
     grid_cube.update(65, orientation);
 
