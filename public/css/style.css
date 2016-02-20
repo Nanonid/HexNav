@@ -6,3 +6,13 @@ body {
 a {
   color: #00B7FF;
 }
+
+.column{
+  display: inline-block;
+  vertical-align: top;
+  
+}
+
+.logo{
+  padding: 5px;
+}

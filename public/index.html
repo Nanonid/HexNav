@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>HexNav</title>
+  <meta name="hexagonal navigation system" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/bootstrap-responsive.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="stylesheet" href="css/hexlib.css">
+
+  <!-- Latest compiled and minified CSS -->
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <script src="js/hexlib.js"></script>
+  <script src="js/hexlib_ui.js"></script>
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand hidden-phone">HexNav</a>
+      <a class="brand visible-phone">HN</a>
+      <ul class="nav">
+        <li class="page_links"><a href="/">Home</a></li>
+        <li class="page_submit"><a href="/export">Export</a></li>
+      </ul>
+      <form class="navbar-search pull-right hidden-phone" action="">
+        <small><i class="icon-search"></i> Search</small>
+        <input id="search" type="text" class="search-query" placeholder="Search Provider ...">
+      </form>
+    </div>
+  </div>
+  <div>
+
+      <div class ="column">
+      <div class="logo"><object type="image/svg+xml" data="images/brain.svg"></object></div>
+      <div class="logo"><object type="image/svg+xml" data="images/eyes.svg"></object></div>
+      <div class="logo"><object type="image/svg+xml" data="images/genetic.svg"></object></div>
+      <div class="logo"><object type="image/svg+xml" data="images/heart.svg"></object></div>
+      <div class="logo"><object type="image/svg+xml" data="images/kidneys.svg"></object></div>
+      </div>
+      <div class ="column">
+      <div class="logo"><object type="image/svg+xml" data="images/intestines.svg"></object></div>
+      <div class="logo"><object type="image/svg+xml" data="images/liver.svg"></object></div>
+      <div class="logo"><object type="image/svg+xml" data="images/teeth.svg"></object></div>
+      <div class="logo"><object type="image/svg+xml" data="images/lungs.svg"></object></div>
+      <div class="logo"><object type="image/svg+xml" data="images/stomach.svg"></object></div>
+    </div>
+    <div id="globecontainer" style="margin: 10px; display: inline-block">
+      <script src="js/globe.js"></script>
+      <svg id="grid-offset-odd-r" width="800" height="400"></svg><br>
+    </div>
+
+  </div>
+  <!-- <div id="globecontainer" style="margin: 10px; display: inline-block">
+
+    <script src="js/globe.js"></script>
+  </div> -->
+
+
+
+
+
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
