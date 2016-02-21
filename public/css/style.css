@@ -7,12 +7,27 @@ a {
   color: #00B7FF;
 }
 
+object{
+  height: 100px;
+  width: 100px;
+}
+
 .column{
   display: inline-block;
   vertical-align: top;
-  
+
 }
 
 .logo{
   padding: 5px;
+}
+
+.logo:hover{
+  padding: 1px;
+
+}
+
+.logo:hover object{
+  width: 108px!important;
+  height: 108px!important;
 }
