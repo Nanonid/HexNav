@@ -1,7 +1,8 @@
 // convenience funciton to create a Hex Globe
 // require: hexlib.js hexlib_ui.js
 //
-function makeHexGlobe(svg, hexbin_id, hexsize, image_url, width, height) {
+
+function makeHexOddR(svg, hexsize, width, height) {
   var hex_width = hexsize * 2 * Math.sin(Math.PI / 3);
   var hex_height = hexsize * 1.5;
 
@@ -9,7 +10,10 @@ function makeHexGlobe(svg, hexbin_id, hexsize, image_url, width, height) {
                       Grid.trapezoidalShape(0, width/hex_width, 0, height/hex_height, Grid.oddRToCube))
                         .addHexCoordinates(Grid.cubeToOddR, true, false)
                         .update(hexsize*2, true);
+  return grid_odd_r;
+}
 
+function makeHexBinMap(grid_odd_r, hexbin_id, hexsize, image_url, width, height) {
   var hexbin = d3.hexbin()
       .size([width, height])
       .radius(hexsize);
@@ -50,11 +54,13 @@ function makeHexGlobe(svg, hexbin_id, hexsize, image_url, width, height) {
 
     grid_odd_r.tiles
       .each(function(d) {
+        d.center = grid_odd_r.grid.hexToCenter(d.cube);
         d.color = color(mapper[d.key]);
         d.node.select("polygon")
           .style("fill", d.color);
       });
   });
+
 
   return grid_odd_r;
 }
@@ -63,4 +69,28 @@ function getHexGlobeImage(path, callback) {
   var image = new Image();
   image.onload = function() { callback(image); };
   image.src = path;
+}
+
+function hexGrid(grid_odd_r, width, height) {
+  var lon_intp = d3.interpolate(-180.0, 180.0);
+  var lat_intp = d3.interpolate(-90.0, 90.0);
+  var hexpoints = [];
+  grid_odd_r.tiles
+    .each(function(d) {
+      if (d.center !== undefined) {
+        var lon = lon_intp(d.center.x / width);
+        var lat = lat_intp(d.center.y / height);
+        hexpoints.push([lon, lat]);
+      }
+      d.node.append("circle")
+        .attr("cx", function(d) { return 0; })
+        .attr("cy", function(d) { return 0; })
+        .attr("r", function(d) { return 0.5; })
+        .style("fill", function(d) { return "white"; });
+    });
+
+  return {
+    type: "MultiPoint",
+    coordinates: hexpoints
+  };
 }
