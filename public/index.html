@@ -81,10 +81,10 @@
       <script src="js/globe.js"></script>
       <!-- <svg id="grid-offset-odd-r" width="800" height="400"></svg> -->
       <div id="myGrid" style="height: 200px; width: 500px">
+      </div>
+
+
     </div>
-
-
-  </div>
 
 
 
@@ -96,42 +96,51 @@
 
 <script src="js/slick/slick.core.js"></script>
 <script src="js/slick/slick.grid.js"></script>
+<script src="js/slick/slick.dataview.js"></script>
 
 <script>
 var grid;
-var columns = [
-  {id: "title", name: "Title", field: "title"},
-  {id: "duration", name: "Duration", field: "duration"},
-  {id: "%", name: "% Complete", field: "percentComplete"},
-  {id: "start", name: "Start", field: "start"},
-  {id: "finish", name: "Finish", field: "finish"},
-  {id: "effort-driven", name: "Effort Driven", field: "effortDriven"}
-];
+var gridData = null;
+
+d3.csv("data/provider_lookup.csv", function(data){
+  data.forEach(function(d,i) {
+    d.id = d.id || i;
+  });
+
+})
+.get(function(error, rows) {
+  gridData = rows;
+  dataLoaded();
+});
+
+
 var options = {
-  enableCellNavigation: true,
+  enableCellNavigation: false,
   enableColumnReorder: false
 };
-$(function () {
-  var data = [];
-  for (var i = 0; i < 500; i++) {
-    data[i] = {
-      title: "Task " + i,
-      duration: "5 days",
-      percentComplete: Math.round(Math.random() * 100),
-      start: "01/01/2009",
-      finish: "01/05/2009",
-      effortDriven: (i % 5 == 0)
-    };
-  }
-  grid = new Slick.Grid("#myGrid", data, columns, options);
-})
+var columns = [];
+
+function dataLoaded(){
+  var dataEntry = gridData[0];
+  console.log(Object.keys(dataEntry));
+  var dataKeys = Object.keys(dataEntry);
+
+  dataKeys.forEach(function(key){
+    columns.push ({id: key, name: key, field: key});
+
+
+  });
+  grid = new Slick.Grid("#myGrid", gridData, columns, options);
+}
+
+
 </script>
 
-  <script src="js/hexlib.js"></script>
-  <script src="js/hexlib_ui.js"></script>
+<script src="js/hexlib.js"></script>
+<script src="js/hexlib_ui.js"></script>
 
 
-  <!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 </html>
