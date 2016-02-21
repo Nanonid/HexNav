@@ -54,6 +54,10 @@ object{
   margin-right: auto;
 }
 
+#globecontainer .arc{
+    stroke-weight: 0.1;
+}
+
 #sidenavbar{
   margin-left: 2%;
 }
