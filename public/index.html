@@ -97,6 +97,7 @@
 <script src="js/slick/slick.core.js"></script>
 <script src="js/slick/slick.grid.js"></script>
 <script src="js/slick/slick.dataview.js"></script>
+<script src="js/slick/slick.rowselectionmodel.js"></script>
 
 <script>
 var grid;
@@ -115,8 +116,9 @@ d3.csv("data/provider_lookup.csv", function(data){
 
 
 var options = {
-  enableCellNavigation: false,
-  enableColumnReorder: false
+  enableCellNavigation: true,
+  enableColumnReorder: false,
+  forceFitColumns: true
 };
 var columns = [];
 
@@ -131,6 +133,16 @@ function dataLoaded(){
 
   });
   grid = new Slick.Grid("#myGrid", gridData, columns, options);
+  grid.setSelectionModel(new Slick.RowSelectionModel());
+  grid.onClick.subscribe(function(e,args) {
+      var d = grid.getDataItem(args.row);
+      // update map and marker
+      //map.setZoom(12);
+      updateGlobe(d.Lon, d.Lat);
+      //d.marker.openPopup();
+
+    });
+
 }
 
 
