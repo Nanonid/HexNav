@@ -32,7 +32,8 @@
         <script src="js/hexglobe.js"></script>
 
         <script>
-        makeHexGlobe("#grid-offset-odd-r", "#hexbin", 5, "images/HexNav_hack_team.jpg", 960, 1016);
+        var grid_odd_r = makeHexOddR("#grid-offset-odd-r", 5, 960, 1016);
+        makeHexBinMap(grid_odd_r, "#hexbin", 5, "images/HexNav_hack_team.jpg", 960, 1016);
         </script>
   </body>
 </html>
