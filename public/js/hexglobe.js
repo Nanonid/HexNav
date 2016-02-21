@@ -1,4 +1,6 @@
 // convenience funciton to create a Hex Globe
+// require: hexlib.js hexlib_ui.js
+//
 function makeHexGlobe(svg, hexbin_id, hexsize, image_url, width, height) {
   var hex_width = hexsize * 2 * Math.sin(Math.PI / 3);
   var hex_height = hexsize * 1.5;
