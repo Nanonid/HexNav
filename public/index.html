@@ -24,12 +24,19 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
 
+  <link rel="stylesheet" href="css/slick.grid.css" type="text/css"/>
+  <link rel="stylesheet" href="css/jquery-ui-1.8.16.custom.css" type="text/css"/>
+  <link rel="stylesheet" href="css/examples.css" type="text/css"/>
+
+
   <link rel="stylesheet" href="css/hexlib.css">
 
   <!-- Latest compiled and minified CSS -->
   <!-- Latest compiled and minified JavaScript -->
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>
+
+
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -56,14 +63,14 @@
   </div>
   <div>
 
-      <div class ="column">
+    <div class ="column">
       <div class="logo"><object type="image/svg+xml" data="images/brain.svg"></object></div>
       <div class="logo"><object type="image/svg+xml" data="images/eyes.svg"></object></div>
       <div class="logo"><object type="image/svg+xml" data="images/genetic.svg"></object></div>
       <div class="logo"><object type="image/svg+xml" data="images/heart.svg"></object></div>
       <div class="logo"><object type="image/svg+xml" data="images/kidneys.svg"></object></div>
-      </div>
-      <div class ="column">
+    </div>
+    <div class ="column">
       <div class="logo"><object type="image/svg+xml" data="images/intestines.svg"></object></div>
       <div class="logo"><object type="image/svg+xml" data="images/liver.svg"></object></div>
       <div class="logo"><object type="image/svg+xml" data="images/teeth.svg"></object></div>
@@ -77,11 +84,47 @@
 
 
   </div>
-  <!-- <div id="globecontainer" style="margin: 10px; display: inline-block">
+  <div id="myGrid" style="height: 200px; width: 600px">
 
-    <script src="js/globe.js"></script>
-  </div> -->
 
+  </div>
+</div>
+
+<script src="js/jquery/jquery-1.7.min.js"></script>
+<script src="js/jquery/jquery.event.drag-2.2.js"></script>
+
+<script src="js/slick/slick.core.js"></script>
+<script src="js/slick/slick.grid.js"></script>
+
+<script>
+var grid;
+var columns = [
+  {id: "title", name: "Title", field: "title"},
+  {id: "duration", name: "Duration", field: "duration"},
+  {id: "%", name: "% Complete", field: "percentComplete"},
+  {id: "start", name: "Start", field: "start"},
+  {id: "finish", name: "Finish", field: "finish"},
+  {id: "effort-driven", name: "Effort Driven", field: "effortDriven"}
+];
+var options = {
+  enableCellNavigation: true,
+  enableColumnReorder: false
+};
+$(function () {
+  var data = [];
+  for (var i = 0; i < 500; i++) {
+    data[i] = {
+      title: "Task " + i,
+      duration: "5 days",
+      percentComplete: Math.round(Math.random() * 100),
+      start: "01/01/2009",
+      finish: "01/05/2009",
+      effortDriven: (i % 5 == 0)
+    };
+  }
+  grid = new Slick.Grid("#myGrid", data, columns, options);
+})
+</script>
 
   <script src="js/hexlib.js"></script>
   <script src="js/hexlib_ui.js"></script>

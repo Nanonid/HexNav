@@ -31,3 +31,10 @@ object{
   width: 108px!important;
   height: 108px!important;
 }
+
+.grid-col {
+  padding: 35px;
+}
+.info-col {
+  padding: 20px;
+}
