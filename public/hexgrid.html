@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=640">
     <link rel="shortcut icon" href="/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7COpen+Sans'%20rel='stylesheet">
-    <link href="//disqus.com/embed/comments/" rel="preconnect">
-    <link href="//a.disquscdn.com/" rel="preconnect">
     <meta name="robots" content="noodp">
     <!-- D3 -->
     <script src="/js/d3.v3.min.js"></script>
@@ -34,13 +32,22 @@
         <div class="float-container">
           <div>
             <div style="width:280px;display:inline-block;margin:5px">
-              <svg id="grid-offset-odd-r" width="800" height="400"></svg><br>
+              <svg id="grid-offset-odd-r" width="960" height="500"></svg><br>
               &#8220;odd-r&#8221; horizontal layout</div>
             </div>
         </div>
 
         <script src="js/hexlib.js"></script>
         <script src="js/hexlib_ui.js"></script>
+        <script>
+        var width = 960;
+        var height = 500;
+        var hexsize = 45;
+        var grid_odd_r =  makeGridDiagram(d3.select('#grid-offset-odd-r'),
+                            Grid.trapezoidalShape(0, width/hexsize, 0, height/hexsize, Grid.oddRToCube))
+                              .addHexCoordinates(Grid.cubeToOddR, true, true)
+                              .update(hexsize, true);
+        </script>
 
   </body>
 </html>

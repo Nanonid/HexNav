@@ -266,16 +266,18 @@ function makeGridDiagram(svg, cubes) {
     };
 
 
-    diagram.addHexCoordinates = function(converter, withMouseover) {
+    diagram.addHexCoordinates = function(converter, withMouseover, withText) {
         diagram.nodes.forEach(function (n) { n.hex = converter(n.cube); });
-        diagram.tiles.append('text')
-            .attr('y', "0.4em")
-            .each(function(d) {
-                var selection = d3.select(this);
-                selection.append('tspan').attr('class', "q").text(d.hex.q);
-                selection.append('tspan').text(", ");
-                selection.append('tspan').attr('class', "r").text(d.hex.r);
-            });
+        if (withText) {
+          diagram.tiles.append('text')
+              .attr('y', "0.4em")
+              .each(function(d) {
+                  var selection = d3.select(this);
+                  selection.append('tspan').attr('class', "q").text(d.hex.q);
+                  selection.append('tspan').text(", ");
+                  selection.append('tspan').attr('class', "r").text(d.hex.r);
+              });
+        }
 
         function setSelection(hex) {
             diagram.tiles
@@ -291,7 +293,6 @@ function makeGridDiagram(svg, cubes) {
 
         return diagram;
     };
-
 
     diagram.addCubeCoordinates = function(withMouseover) {
         diagram.tiles.append('text')
@@ -399,10 +400,10 @@ function makeGridDiagram(svg, cubes) {
 var grid_cube = makeGridDiagram(d3.select("#grid-cube"), Grid.hexagonalShape(3))
     .addCubeCoordinates(true);
 
-var grid_odd_r =  makeGridDiagram(d3.select('#grid-offset-odd-r'),
-                    Grid.trapezoidalShape(0, 15, 0, 7, Grid.oddRToCube))
-                      .addHexCoordinates(Grid.cubeToOddR, true)
-                      .update(40, true);
+// var grid_odd_r =  makeGridDiagram(d3.select('#grid-offset-odd-r'),
+//                     Grid.trapezoidalShape(0, 15, 0, 7, Grid.oddRToCube))
+//                       .addHexCoordinates(Grid.cubeToOddR, true)
+//                       .update(40, true);
 
 function orient(orientation) {
     grid_cube.update(65, orientation);

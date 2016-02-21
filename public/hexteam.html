@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hexagonal Globe</title>
+    <!-- D3 -->
+    <script src="/js/d3.v3.min.js"></script>
+    <script src="http://d3js.org/d3.hexbin.v0.min.js"></script>
+
+    <link rel="stylesheet" href="css/hexlib.css">
+
+    <style>
+    canvas {
+      display: none;
+    }
+    </style>
+
+  </head>
+
+  <body class="gameprog width600">
+
+        <div class="float-container">
+          <div>
+            <div style="width:280px;display:inline-block;margin:5px">
+              <svg id="grid-offset-odd-r" width="960" height="1016"></svg>
+            </div>
+        </div>
+
+        <div id="hexbin">
+
+        <script src="js/hexlib.js"></script>
+        <script src="js/hexlib_ui.js"></script>
+        <script src="js/hexglobe.js"></script>
+
+        <script>
+        makeHexGlobe("#grid-offset-odd-r", "#hexbin", 5, "images/HexNav_hack_team.jpg", 960, 1016);
+        </script>
+  </body>
+</html>
