@@ -61,36 +61,54 @@ function makeHexBinMap(grid_odd_r, hexbin_id, hexsize, image_url, width, height)
       });
   });
 
-
   return grid_odd_r;
 }
 
 function getHexGlobeImage(path, callback) {
   var image = new Image();
-  image.onload = function() { callback(image); };
+  image.onload = function() {
+    callback(image);
+    hexgrid = hexWorldGrid(grid_odd_r, 960, 500);
+  };
   image.src = path;
 }
 
-function hexGrid(grid_odd_r, width, height) {
+function hexWorldGrid(grid_odd_r, width, height) {
   var lon_intp = d3.interpolate(-180.0, 180.0);
   var lat_intp = d3.interpolate(-90.0, 90.0);
-  var hexpoints = [];
+  var hexvertices = grid_odd_r.grid.polygonVertices();
+  var hgrid = [];
+
   grid_odd_r.tiles
     .each(function(d) {
       if (d.center !== undefined) {
-        var lon = lon_intp(d.center.x / width);
-        var lat = lat_intp(d.center.y / height);
-        hexpoints.push([lon, lat]);
+        var hexpoints = [];
+        hexvertices.forEach(function(v,i) {
+          var lon = lon_intp((d.center.x + v.x) / width);
+          var lat = lat_intp((d.center.y + v.y) / height);
+          hexpoints.push([lon, -lat]);
+        });
+        hexpoints.push(hexpoints[0]); // close the polygon
+        hexpoints.reverse();
+        var feature = {
+          type: "Feature",
+          geometry: {
+            type: "LineString",
+            coordinates: hexpoints
+          },
+          properties: {
+            "color": d.color
+          }
+        }
+        hgrid.push(feature);
       }
-      d.node.append("circle")
-        .attr("cx", function(d) { return 0; })
-        .attr("cy", function(d) { return 0; })
-        .attr("r", function(d) { return 0.5; })
-        .style("fill", function(d) { return "white"; });
+
     });
 
+  console.log("HexGrid size is " + hgrid.length);
   return {
-    type: "MultiPoint",
-    coordinates: hexpoints
+    type: "FeatureCollection",
+    features: hgrid
   };
+
 }

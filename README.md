@@ -24,7 +24,7 @@ node app.js
 
 Navigate from the browser to http://localhost:8000 (default port 8000) to see the main page.
 
-![HexNav Main Page](doc/HexNav_hexgrid_integration.png)
+![HexNav Main Page](doc/HexNav_hexgrid_globe.png)
 
 # References
 

@@ -287,8 +287,18 @@ function makeGridDiagram(svg, cubes) {
 
         if (withMouseover) {
             diagram.tiles
-                .on('mouseover', function(d) { setSelection(d.hex); })
-                .on('touchstart', function(d) { setSelection(d.hex); });
+                .on('mouseover', function(d) {
+                  setSelection(d.hex);
+                  var lon_intp = d3.interpolate(-180.0, 180.0);
+                  var lat_intp = d3.interpolate(-90.0, 90.0);
+                  var center = grid_odd_r.grid.hexToCenter(d.cube);
+                  var lon = lon_intp(center.x / 960);
+                  var lat = lat_intp(center.y / 500);
+                  updateGlobe(lon, -lat);
+                })
+                .on('touchstart', function(d) {
+                  setSelection(d.hex);
+                });
         }
 
         return diagram;

@@ -116,19 +116,37 @@ d3.json("data/world-110m.json", function(error, topo) {
     }
 
 
-    context.beginPath();
-    path(grid);
-    context.lineWidth = .5;
-    context.strokeStyle = "rgba(119,119,119,.5)";
-    context.stroke();
+    // context.beginPath();
+    // path(grid);
+    // context.lineWidth = .5;
+    // context.strokeStyle = "rgba(119,119,119,.5)";
+    // context.stroke();
 
-    context.beginPath();
-    path(land);
-    context.fillStyle = "#737368";
-    context.fill();
-    context.lineWidth = .5;
-    context.strokeStyle = "#000";
-    context.stroke();
+    // context.beginPath();
+    // path(land);
+    // context.fillStyle = "#737368";
+    // context.fill();
+    // context.lineWidth = .5;
+    // context.strokeStyle = "#000";
+    // context.stroke();
+
+    // context.beginPath();
+    // path(hexgrid);
+    // context.fillStyle = "#732222";
+    // context.fill();
+    // context.lineWidth = .5;
+    // context.strokeStyle = "rgba(0,0,119,.5)";
+    // context.stroke();
+
+    hexgrid.features.forEach(function(d, i) {
+      context.beginPath();
+      path(d);
+      context.fillStyle = d.properties.color;
+      context.fill();
+      context.lineWidth = .5;
+      context.strokeStyle = "rgba(0,0,119,.5)";
+      context.stroke();
+    });
 
     if(!manual){
       context.beginPath();
@@ -147,7 +165,7 @@ d3.json("data/world-110m.json", function(error, topo) {
     //   reticule.style("visibility", "visible");
     // }
 
-  });
+  }, 300);
 });
 
 d3.select(self.frameElement).style("height", height + "px");

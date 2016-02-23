@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/hexlib.css">
 
   <link rel="stylesheet" href="css/slick.grid.css" type="text/css"/>
   <link rel="stylesheet" href="css/jquery-ui-1.8.16.custom.css" type="text/css"/>
@@ -33,9 +34,9 @@
 
   <!-- Latest compiled and minified CSS -->
   <!-- Latest compiled and minified JavaScript -->
-  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="js/d3.v3.min.js"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>
-  <script src="http://d3js.org/d3.hexbin.v0.min.js"></script>
+  <script src="js/d3.hexbin.js"></script>
 
 
 
@@ -79,30 +80,38 @@
       <div class="logo"><object type="image/svg+xml" data="images/stomach.svg"></object></div>
     </div>
     <div id="globecontainer" style="display: inline-block">
-      <script src="js/globe.js"></script>
-      <div id="myGrid" style="height: 200px; width: 500px">
-      </div>
+    <div id="myGrid" style="height: 200px; width: 500px">
     </div>
-  </div>
+    </div>
 
-  <div class="float-container">
-    <div>
-      <div style="width:280px;display:inline-block;margin:5px">
-        <svg id="grid-offset-odd-r" width="960" height="500"></svg>
-      </div>
-  </div>
 
-  <div id="hexbin"
+
+
+
+  </div>
+</div>
+<div class="float-container">
+  <div>
+    <div style="width:280px;display:inline-block;margin:5px">
+      <svg id="grid-offset-odd-r" width="960" height="500"></svg>
+    </div>
 </div>
 
+<div id="hexbin">
 
-<script src="js/jquery/jquery-1.7.min.js"></script>
-<script src="js/jquery/jquery.event.drag-2.2.js"></script>
 
-<script src="js/slick/slick.core.js"></script>
-<script src="js/slick/slick.grid.js"></script>
-<script src="js/slick/slick.dataview.js"></script>
-<script src="js/slick/slick.rowselectionmodel.js"></script>
+
+<script src="js/hexlib.js"></script>
+<script src="js/hexlib_ui.js"></script>
+<script src="js/hexglobe.js"></script>
+
+<script>
+  var hexgrid;
+  var grid_odd_r = makeHexOddR("#grid-offset-odd-r", 10, 960, 500);
+  makeHexBinMap(grid_odd_r, "#hexbin", 10, "images/world_height.png", 960, 500);
+</script>
+
+<script src="js/globe.js"></script>
 
 <script>
 var grid;
@@ -150,17 +159,15 @@ function dataLoaded(){
 
 }
 
-
 </script>
 
-<script src="js/hexlib.js"></script>
-<script src="js/hexlib_ui.js"></script>
-<script src="js/hexglobe.js"></script>
+<script src="js/jquery/jquery-1.7.min.js"></script>
+<script src="js/jquery/jquery.event.drag-2.2.js"></script>
 
-<script>
-  var grid_odd_r = makeHexOddR("#grid-offset-odd-r", 5, 960, 500);
-  makeHexBinMap(grid_odd_r, "#hexbin", 5, "images/world_height.png", 960, 500);
-</script>
+<script src="js/slick/slick.core.js"></script>
+<script src="js/slick/slick.grid.js"></script>
+<script src="js/slick/slick.dataview.js"></script>
+<script src="js/slick/slick.rowselectionmodel.js"></script>
 
 <!-- End Document
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
