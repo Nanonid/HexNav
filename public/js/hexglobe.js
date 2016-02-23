@@ -10,6 +10,8 @@ function makeHexOddR(svg, hexsize, width, height) {
                       Grid.trapezoidalShape(0, width/hex_width, 0, height/hex_height, Grid.oddRToCube))
                         .addHexCoordinates(Grid.cubeToOddR, true, false)
                         .update(hexsize*2, true);
+  grid_odd_r.width = width;
+  grid_odd_r.height = height;
   return grid_odd_r;
 }
 
@@ -73,23 +75,39 @@ function getHexGlobeImage(path, callback) {
   image.src = path;
 }
 
-function hexWorldGrid(grid_odd_r, width, height) {
+function screenToLonLat(grid_odd_r, screenPoint) {
   var lon_intp = d3.interpolate(-180.0, 180.0);
   var lat_intp = d3.interpolate(-90.0, 90.0);
+  var lon = lon_intp(screenPoint[0] / grid_odd_r.width);
+  var lat = lat_intp(screenPoint[1] / grid_odd_r.height);
+  // since screen coordinate is starting at the top-left corner
+  // we need to invert the Y-axis, i.e. lat
+  return [lon, -lat];
+}
+
+function hexToLonLatHex(grid_odd_r, hex) {
   var hexvertices = grid_odd_r.grid.polygonVertices();
+  var center = grid_odd_r.grid.hexToCenter(hex);
+  var hexpoints = [];
+  hexvertices.forEach(function(v,i) {
+      var sx = center.x + v.x;
+      var sy = center.y + v.y;
+      var lonlat = screenToLonLat(grid_odd_r, [sx, sy]);
+      hexpoints.push(lonlat);
+  });
+  hexpoints.push(hexpoints[0]); // close the polygon
+  hexpoints.reverse(); // polygon needs to arrange in counter-clockwise
+
+  return hexpoints;
+}
+
+function hexWorldGrid(grid_odd_r, width, height) {
   var hgrid = [];
 
   grid_odd_r.tiles
     .each(function(d) {
       if (d.center !== undefined) {
-        var hexpoints = [];
-        hexvertices.forEach(function(v,i) {
-          var lon = lon_intp((d.center.x + v.x) / width);
-          var lat = lat_intp((d.center.y + v.y) / height);
-          hexpoints.push([lon, -lat]);
-        });
-        hexpoints.push(hexpoints[0]); // close the polygon
-        hexpoints.reverse();
+        hexpoints = hexToLonLatHex(grid_odd_r, d.cube);
         var feature = {
           type: "Feature",
           geometry: {
@@ -99,7 +117,7 @@ function hexWorldGrid(grid_odd_r, width, height) {
           properties: {
             "color": d.color
           }
-        }
+        };
         hgrid.push(feature);
       }
 
