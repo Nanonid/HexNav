@@ -138,7 +138,7 @@ d3.json("data/world-110m.json", function(error, topo) {
     // context.strokeStyle = "rgba(0,0,119,.5)";
     // context.stroke();
 
-    hexgrid.features.forEach(function(d, i) {
+    grid_odd_r.hexgrid.features.forEach(function(d, i) {
       context.beginPath();
       path(d);
       context.fillStyle = d.properties.color;

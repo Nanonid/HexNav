@@ -7,7 +7,7 @@ function makeHexOddR(svg, hexsize, width, height) {
   var hex_height = hexsize * 1.5;
 
   var grid_odd_r =  makeGridDiagram(d3.select(svg),
-                      Grid.trapezoidalShape(0, width/hex_width, 0, height/hex_height, Grid.oddRToCube))
+                      Grid.trapezoidalShape(0, (width/hex_width)-1, 0, height/hex_height, Grid.oddRToCube))
                         .addHexCoordinates(Grid.cubeToOddR, true, false)
                         .update(hexsize*2, true);
   grid_odd_r.width = width;
@@ -61,6 +61,8 @@ function makeHexBinMap(grid_odd_r, hexbin_id, hexsize, image_url, width, height)
         d.node.select("polygon")
           .style("fill", d.color);
       });
+
+    grid_odd_r.hexgrid = hexWorldGrid(grid_odd_r);
   });
 
   return grid_odd_r;
@@ -70,7 +72,6 @@ function getHexGlobeImage(path, callback) {
   var image = new Image();
   image.onload = function() {
     callback(image);
-    hexgrid = hexWorldGrid(grid_odd_r, 960, 500);
   };
   image.src = path;
 }
@@ -101,7 +102,7 @@ function hexToLonLatHex(grid_odd_r, hex) {
   return hexpoints;
 }
 
-function hexWorldGrid(grid_odd_r, width, height) {
+function hexWorldGrid(grid_odd_r) {
   var hgrid = [];
 
   grid_odd_r.tiles
